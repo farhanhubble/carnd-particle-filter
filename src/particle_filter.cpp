@@ -24,7 +24,22 @@ void ParticleFilter::init(double x, double y, double theta, double std[]) {
 	//   x, y, theta and their uncertainties from GPS) and all weights to 1. 
 	// Add random Gaussian noise to each particle.
 	// NOTE: Consult particle_filter.h for more information about this method (and others in this file).
+	num_particles = 1000;
+	particles = std::vector<Particle>(num_particles);
 
+	std::default_random_engine rand_engine;
+	std::normal_distribution<double> x_distribution(x,std[0]);
+	std::normal_distribution<double> y_distribution(y,std[1]);
+	std::normal_distribution<double> theta_distribution(theta,std[2]); 
+
+	for(int i=0; i<num_particles; i++){
+		particles[i].id = i;
+		particles[i].x = x_distribution(rand_engine);
+		particles[i].y = y_distribution(rand_engine);
+		particles[i].theta = theta_distribution(rand_engine);
+		particles[i].weight = 1;
+
+	}
 }
 
 void ParticleFilter::prediction(double delta_t, double std_pos[], double velocity, double yaw_rate) {
@@ -32,6 +47,29 @@ void ParticleFilter::prediction(double delta_t, double std_pos[], double velocit
 	// NOTE: When adding noise you may find std::normal_distribution and std::default_random_engine useful.
 	//  http://en.cppreference.com/w/cpp/numeric/random/normal_distribution
 	//  http://www.cplusplus.com/reference/random/default_random_engine/
+	std::default_random_engine rand_engine;
+	for(int i=0; i<num_particles; i++){
+		double mean_x, mean_y, mean_theta;
+		if(yaw_rate != 0){
+			mean_x = (velocity/yaw_rate) * (sin(particles[i].theta+yaw_rate*delta_t)-sin(particles[i].theta));
+			mean_y = (velocity/yaw_rate) * (cos(particles[i].theta)-cos(particles[i].theta+yaw_rate*delta_t));
+			mean_theta = particles[i].theta + yaw_rate * delta_t;
+		}
+		else{
+			mean_x = velocity * cos(yaw_rate)*delta_t;
+			mean_y = velocity * sin(yaw_rate)*delta_t;
+			mean_theta = particles[i].theta;
+		}
+
+		std::normal_distribution<double> x_distribution(mean_x,std_pos[0]);
+		std::normal_distribution<double> y_distribution(mean_y,std_pos[1]);
+		std::normal_distribution<double> theta_distribution(mean_theta,std_pos[2]); 
+	
+		particles[i].x = x_distribution(rand_engine);
+		particles[i].y = y_distribution(rand_engine);
+		particles[i].theta = theta_distribution(rand_engine);
+		 
+	}
 
 }
 
