@@ -1,6 +1,8 @@
 # Overview
 This repository contains an implementation of a particle filter for localizing a vehicle in a 2D environment. The code was written for the **Kidnapped Vehicle** project for Udacity's Self-driving Car Nanodegree.
 
+![Particle Filter](res/particle-filter.png)
+
 ## Project Introduction
 A car has been kidnapped and transported to a new location! Luckily it has a map of this location, a (noisy) GPS estimate of its initial location, and lots of (noisy) sensor and control data.
 
