@@ -27,7 +27,7 @@ Alternatively some scripts have been included to streamline this process, these 
 
 Tips for setting up your environment can be found [here](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/0949fca6-b379-42af-a919-ee50aa304e6a/lessons/f758c44c-5e40-4e01-93b5-1a82aa4e044f/concepts/23d376c7-0195-4276-bdf0-e02f1f3c665d)
 
-## Particle Filter implementation
+## Particle Filter Theory
 A particle filter estimates the location of an object by starting with a list of likely locations and increasing or decreasing the probability of each location using a Map and information about the observed by the object. 
 
 Every location is represented by a particle that contains all state variables being estimated. Intially a particle filter intiailizes a swarm of such particles with random values for the state variables. It then finds the probability of each particle representing the true position by comparing the sensor observations received from the true (unknown) position with the predicted observations computed using the particle's state in a map.
