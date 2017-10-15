@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Overview
 This repository contains all the code needed to complete the final project for the Localization course in Udacity's Self-Driving Car Nanodegree.
 
@@ -144,3 +145,7 @@ A well written README file can enhance your project and portfolio.  Develop your
 
 
 
+=======
+# carnd-particle-filter
+Particle filter for tracking a kidnapped vehicle.
+>>>>>>> a4fa7d36dc35780d1d0282cad6b8ab947edf8955
